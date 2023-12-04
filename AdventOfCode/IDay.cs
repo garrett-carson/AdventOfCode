@@ -1,8 +1,7 @@
-﻿namespace AdventOfCode
+﻿namespace AdventOfCode;
+
+public interface IDay
 {
-    public interface IDay
-    {
-        string Q1();
-        string Q2();
-    }
+	string Q1();
+	string Q2();
 }

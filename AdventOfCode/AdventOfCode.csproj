@@ -17,12 +17,26 @@
     <None Remove="Day\One\Input.txt" />
     <None Remove="Day\One\Sample1.txt" />
     <None Remove="Day\One\Sample2.txt" />
+    <None Remove="Day\Two\Input.param.json" />
+    <None Remove="Day\Two\Input.txt" />
+    <None Remove="Day\Two\Sample1.param.json" />
+    <None Remove="Day\Two\Sample1.txt" />
+    <None Remove="Day\Two\Sample2.txt" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Day\One\Input.txt" />
     <EmbeddedResource Include="Day\One\Sample1.txt" />
     <EmbeddedResource Include="Day\One\Sample2.txt" />
+    <EmbeddedResource Include="Day\Two\Input.param.json" />
+    <EmbeddedResource Include="Day\Two\Input.txt" />
+    <EmbeddedResource Include="Day\Two\Sample2.txt" />
+    <EmbeddedResource Include="Day\Two\Sample1.param.json" />
+    <EmbeddedResource Include="Day\Two\Sample1.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
 </Project>

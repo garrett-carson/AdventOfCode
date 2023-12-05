@@ -1,5 +1,4 @@
 ﻿using System.Text.RegularExpressions;
-using System.Diagnostics;
 
 namespace AdventOfCode.Day.One;
 /// <summary>
@@ -45,8 +44,6 @@ namespace AdventOfCode.Day.One;
 /// In this example, the calibration values are 29, 83, 13, 24, 42, 14, and 76. Adding these together produces 281.
 /// 
 /// What is the sum of all of the calibration values?
-/// 
-/// 
 /// </summary>
 public class Day1 : DayBase
 {
@@ -67,10 +64,11 @@ public class Day1 : DayBase
 		{"nine", 9},
 	};
 
-	static Day1() {
+	static Day1()
+	{
 		var pattern = @$"(\d|{string.Join("|", wordsToNumbers.Keys!)})";
-		_enhancedFirstDigit = new (pattern);
-		_enhancedLastDigit = new (pattern, RegexOptions.RightToLeft);
+		_enhancedFirstDigit = new(pattern);
+		_enhancedLastDigit = new(pattern, RegexOptions.RightToLeft);
 	}
 
 	public override string Q1(string? fileName = "Input.txt")

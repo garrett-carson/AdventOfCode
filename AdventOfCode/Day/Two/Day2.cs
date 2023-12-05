@@ -59,8 +59,9 @@ namespace AdventOfCode.Day.Two;
 /// </summary>
 public class Day2 : DayBase
 {
-	private Regex _game = new(@"(?i)^Game (?<GameNo>\d+):\s+(?<Data>.+)$");
-	private Regex _data = new(@"(\d+)\s+(\w+)");
+	private readonly Regex _game = new(@"(?i)^Game (?<GameNo>\d+):\s+(?<Data>.+)$");
+	private readonly Regex _data = new(@"(\d+)\s+(\w+)");
+
 	public override string Q1(string? filename = "Input.txt")
 	{
 		var input = GetInputLines(filename);

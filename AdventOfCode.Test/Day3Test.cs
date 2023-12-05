@@ -1,4 +1,4 @@
-﻿using AdventOfCode.Three;
+﻿using AdventOfCode.Day.Three;
 
 namespace AdventOfCode.Test;
 

@@ -14,6 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Day\Four\Input.txt" />
+    <None Remove="Day\Four\Sample1.txt" />
+    <None Remove="Day\Four\Sample2.txt" />
     <None Remove="Day\One\Input.txt" />
     <None Remove="Day\One\Sample1.txt" />
     <None Remove="Day\One\Sample2.txt" />
@@ -22,12 +25,15 @@
     <None Remove="Day\Two\Sample1.param.json" />
     <None Remove="Day\Two\Sample1.txt" />
     <None Remove="Day\Two\Sample2.txt" />
-    <None Remove="Three\Input.txt" />
-    <None Remove="Three\Sample1.txt" />
-    <None Remove="Three\Sample2.txt" />
+    <None Remove="Day\Three\Input.txt" />
+    <None Remove="Day\Three\Sample1.txt" />
+    <None Remove="Day\Three\Sample2.txt" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Day\Four\Input.txt" />
+    <EmbeddedResource Include="Day\Four\Sample1.txt" />
+    <EmbeddedResource Include="Day\Four\Sample2.txt" />
     <EmbeddedResource Include="Day\One\Input.txt" />
     <EmbeddedResource Include="Day\One\Sample1.txt" />
     <EmbeddedResource Include="Day\One\Sample2.txt" />
@@ -36,9 +42,9 @@
     <EmbeddedResource Include="Day\Two\Sample2.txt" />
     <EmbeddedResource Include="Day\Two\Sample1.param.json" />
     <EmbeddedResource Include="Day\Two\Sample1.txt" />
-    <EmbeddedResource Include="Three\Input.txt" />
-    <EmbeddedResource Include="Three\Sample2.txt" />
-    <EmbeddedResource Include="Three\Sample1.txt" />
+    <EmbeddedResource Include="Day\Three\Input.txt" />
+    <EmbeddedResource Include="Day\Three\Sample2.txt" />
+    <EmbeddedResource Include="Day\Three\Sample1.txt" />
   </ItemGroup>
 
   <ItemGroup>

@@ -5,10 +5,10 @@ namespace AdventOfCode;
 public abstract class DayBase : IDay
 {
 	protected static readonly Regex line = new(@"\r?\n", RegexOptions.Compiled);
-	string IDay.Q1() => Q1();
-	string IDay.Q2() => Q2();
-	public abstract string Q1(string? filename = "Input.txt");
-	public abstract string Q2(string? filename = "Input.txt");
+	Task<string> IDay.Q1() => Q1();
+	Task<string> IDay.Q2() => Q2();
+	public abstract Task<string> Q1(string? filename = "Input.txt");
+	public abstract Task<string> Q2(string? filename = "Input.txt");
 
 	public string GetInput(string? filename)
 	{

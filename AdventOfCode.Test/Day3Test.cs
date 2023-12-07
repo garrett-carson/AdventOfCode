@@ -13,26 +13,26 @@ public class Day3Test
 	}
 
 	[TestMethod]
-	public void Sample1()
+	public async Task Sample1Async()
 	{
-		Assert.AreEqual("4361", _day.Q1("Sample1.txt"));
+		Assert.AreEqual("4361", await _day.Q1("Sample1.txt"));
 	}
 
 	[TestMethod]
-	public void Sample2()
+	public async Task Sample2Async()
 	{
-		Assert.AreEqual("467835", _day.Q2("Sample2.txt"));
+		Assert.AreEqual("467835", await _day.Q2("Sample2.txt"));
 	}
 
 	[TestMethod]
-	public void Q1()
+	public async Task Q1Async()
 	{
-		Assert.AreEqual("527144", _day.Q1());
+		Assert.AreEqual("527144", await _day.Q1());
 	}
 
 	[TestMethod]
-	public void Q2()
+	public async Task Q2Async()
 	{
-		Assert.AreEqual("81463996", _day.Q2());
+		Assert.AreEqual("81463996", await _day.Q2());
 	}
 }

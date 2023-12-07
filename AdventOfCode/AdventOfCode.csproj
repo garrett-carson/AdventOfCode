@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -14,6 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Day\Five\Input.txt" />
+    <None Remove="Day\Five\Sample1.txt" />
+    <None Remove="Day\Five\Sample2.txt" />
     <None Remove="Day\Four\Input.txt" />
     <None Remove="Day\Four\Sample1.txt" />
     <None Remove="Day\Four\Sample2.txt" />
@@ -31,6 +34,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Day\Five\Input.txt" />
+    <EmbeddedResource Include="Day\Five\Sample1.txt" />
+    <EmbeddedResource Include="Day\Five\Sample2.txt" />
     <EmbeddedResource Include="Day\Four\Input.txt" />
     <EmbeddedResource Include="Day\Four\Sample1.txt" />
     <EmbeddedResource Include="Day\Four\Sample2.txt" />

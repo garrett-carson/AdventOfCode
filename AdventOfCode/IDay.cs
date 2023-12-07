@@ -2,6 +2,6 @@
 
 public interface IDay
 {
-	string Q1();
-	string Q2();
+	Task<string> Q1();
+	Task<string> Q2();
 }

@@ -15,6 +15,6 @@ foreach (var day in new IDay[]
 	new Day5(),
 })
 {
-	Console.WriteLine(day.GetType().Name + "Q1: " + await day.Q1());
-	Console.WriteLine(day.GetType().Name + "Q2: " + await day.Q2());
+	Console.WriteLine(day.GetType().Name + "Q1: " + day.Q1());
+	Console.WriteLine(day.GetType().Name + "Q2: " + day.Q2());
 }

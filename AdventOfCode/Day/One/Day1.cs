@@ -71,7 +71,7 @@ public class Day1 : DayBase
 		_enhancedLastDigit = new(pattern, RegexOptions.RightToLeft);
 	}
 
-	public override async Task<string> Q1(string? fileName = "Input.txt")
+	public override string Q1(string? fileName = "Input.txt")
 	{
 		var input = GetInputLines(fileName);
 		int total = 0;
@@ -87,7 +87,7 @@ public class Day1 : DayBase
 		return total.ToString("0");
 	}
 
-	public override async Task<string> Q2(string? fileName = "Input.txt")
+	public override string Q2(string? fileName = "Input.txt")
 	{
 		var input = GetInputLines(fileName);
 		int total = 0;

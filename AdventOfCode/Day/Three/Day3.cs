@@ -69,7 +69,7 @@ public class Day3 : DayBase
     private static readonly Regex _digits = new(@"\d+");
     private static readonly Regex _symbol = new(@"[^\d.]");
     private static readonly Regex _gear = new(@"\*");
-    public override async Task<string> Q1(string? filename = "Input.txt")
+    public override string Q1(string? filename = "Input.txt")
     {
         var lines = GetInputLines(filename);
 
@@ -115,7 +115,7 @@ public class Day3 : DayBase
         return answer.ToString("0");
     }
 
-    public override async Task<string> Q2(string? filename = "Input.txt")
+    public override string Q2(string? filename = "Input.txt")
     {
         var lines = GetInputLines(filename);
         var answer = 0;

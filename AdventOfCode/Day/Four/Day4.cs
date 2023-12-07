@@ -79,7 +79,7 @@ public class Day4 : DayBase
 {
 	private readonly Regex _card = new(@"(?i)^Card\s+(?<CardNo>\d+):(?<Winners>(?:\s+\d+)+)\s+\|(?<Values>(?:\s+\d+)+)$");
 	private readonly Regex _space = new(@"\s+");
-	public override async Task<string> Q1(string? filename = "Input.txt")
+	public override string Q1(string? filename = "Input.txt")
 	{
 		var lines = GetInputLines(filename);
 		var answer = 0;
@@ -102,7 +102,7 @@ public class Day4 : DayBase
 		return answer.ToString("0");
 	}
 
-	public override async Task<string> Q2(string? filename = "Input.txt")
+	public override string Q2(string? filename = "Input.txt")
 	{
 		var lines = GetInputLines(filename);
 		var answer = 0;

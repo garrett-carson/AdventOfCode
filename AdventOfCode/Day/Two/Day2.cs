@@ -62,7 +62,7 @@ public class Day2 : DayBase
 	private readonly Regex _game = new(@"(?i)^Game (?<GameNo>\d+):\s+(?<Data>.+)$");
 	private readonly Regex _data = new(@"(\d+)\s+(\w+)");
 
-	public override async Task<string> Q1(string? filename = "Input.txt")
+	public override string Q1(string? filename = "Input.txt")
 	{
 		var input = GetInputLines(filename);
 		var answer = 0;
@@ -95,7 +95,7 @@ public class Day2 : DayBase
 		return answer.ToString("0");
 	}
 
-	public override async Task<string> Q2(string? filename = "Input.txt")
+	public override string Q2(string? filename = "Input.txt")
 	{
 		var input = GetInputLines(filename);
 		var answer = 0;

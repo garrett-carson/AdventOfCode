@@ -143,143 +143,91 @@ namespace AdventOfCode.Day.Five;
 /// </summary>
 public class Day5 : DayBase
 {
-    private static readonly Regex _seeds = new(@"(?i)^seeds:\s+(?<Seeds>(?:\s*\d+)+)$");
-    private static readonly Regex _map = new(@"(?i)^(?<Source>\w+)-to-(?<Target>\w+) map:$");
-    private static readonly Regex _range = new(@$"^(?<{nameof(Range.TargetStart)}>\d+)\s+(?<{nameof(Range.SourceStart)}>\d+)\s+(?<{nameof(Range.RangeLength)}>\d+)$");
-    private static readonly Regex _whitespace = new(@"(?s)\s+");
-    public override async Task<string> Q1(string? filename = "Input.txt")
+    public override string Q1(string? filename = "Input.txt")
 	{
-		var answer = (long?)null;
-		var lines = GetInputLines(filename);
-		var seeds = _whitespace
-			.Split(_seeds.Match(lines[0]).Groups["Seeds"].Value)
-			.Where(x => !string.IsNullOrWhiteSpace(x))
-			.Select(long.Parse)
-			.ToList();
-
-		var maps = GetMaps(lines);
-
-		foreach (var seed in seeds)
-		{
-			var current = seed;
-			current = TraverseMaps(maps, current);
-
-			if (answer == null || current < answer)
-				answer = current;
-		}
-
-		return (answer ?? 0).ToString("0");
+		return Solve(GetInput(filename), PartOneRanges).ToString("0");
 	}
 
-	private static long TraverseMaps(List<KeyValuePair<(string Source, string Target), IList<Range>>> maps, long current)
+	public override string Q2(string? filename = "Input.txt")
 	{
-		foreach (var map in maps)
-		{
-			var mapped = map.Value.Select(x => x.Map(current)).FirstOrDefault(x => x != null);
-			if (mapped != null)
-				current = mapped.Value;
-		}
-
-		return current;
+		return Solve(GetInput(filename), PartTwoRanges).ToString("0");
 	}
 
-	private static List<KeyValuePair<(string Source, string Target), IList<Range>>> GetMaps(string[] lines)
+	long Solve(string input, Func<long[], IEnumerable<Range>> parseSeeds)
 	{
-		var maps = new List<KeyValuePair<(string Source, string Target), IList<Range>>>();
-		for (int i = 2; i < lines.Length; i++)
+		var blocks = Regex.Split(input, @"\r?\n\r?\n");
+		var seedRanges = parseSeeds(ParseNumbers(blocks[0])).ToArray();
+		var maps = blocks.Skip(1).Select(ParseMap).ToArray();
+
+		// Project each range through the series of maps, this will result some
+		// new ranges. Return the leftmost value (minimum) of these.
+		return maps.Aggregate(seedRanges, Project).Select(r => r.From).Min();
+	}
+
+	Range[] Project(Range[] inputRanges, Dictionary<Range, Range> map)
+	{
+		var todo = new Queue<Range>();
+		foreach (var range in inputRanges)
 		{
-			var mapMatch = _map.Match(lines[i]);
-			var source = mapMatch.Groups["Source"].Value;
-			var target = mapMatch.Groups["Target"].Value;
-			var ranges = new List<Range>();
-			while (++i < lines.Length && !string.IsNullOrWhiteSpace(lines[i]))
+			todo.Enqueue(range);
+		}
+
+		var outputRanges = new List<Range>();
+		while (todo.Any())
+		{
+			var range = todo.Dequeue();
+			// If no entry intersects our range -> just add it to the output. 
+			// If an entry completely contains the range -> add after mapping.
+			// Otherwise, some entry partly covers the range. In this case 'chop' 
+			// the range into two halfs getting rid of the intersection. The new 
+			// pieces are added back to the queue for further processing and will be 
+			// ultimately consumed by the first two cases.
+			var src = map.Keys.FirstOrDefault(src => Intersects(src, range));
+			if (src == null)
 			{
-				var rangeMatch = _range.Match(lines[i]);
-				ranges.Add(new Range
-				{
-					SourceStart = long.Parse(rangeMatch.Groups[nameof(Range.SourceStart)].Value),
-					TargetStart = long.Parse(rangeMatch.Groups[nameof(Range.TargetStart)].Value),
-					RangeLength = long.Parse(rangeMatch.Groups[nameof(Range.RangeLength)].Value),
-				});
+				outputRanges.Add(range);
 			}
-			maps.Add(new KeyValuePair<(string Source, string Target), IList<Range>>((source, target), ranges));
-		}
-
-		return maps;
-	}
-	public record Range<T> { public T Start { get; init; } public T End { get; init; } public int Index { get; init; } }
-	public override async Task<string> Q2(string? filename = "Input.txt")
-	{
-		var lines = GetInputLines(filename);
-		var seedRanges = _whitespace
-			.Split(_seeds.Match(lines[0]).Groups["Seeds"].Value)
-			.Where(x => !string.IsNullOrWhiteSpace(x))
-			.Select(long.Parse)
-			.ToList();
-
-		var seedPairs = seedRanges
-			.Chunk(2)
-			.Select(x => new {Start = x[0], Range = x[1]})
-			.ToList();
-
-		var maps = GetMaps(lines);
-
-		var tasks = new List<Range<long>>();
-
-		foreach (var seedPair in seedPairs)
-		{
-			var start = seedPair.Start;
-			var chunksize = seedPair.Range / Environment.ProcessorCount;
-			for (var i = 1; i <= Environment.ProcessorCount; i++)
+			else if (src.From <= range.From && range.To <= src.To)
 			{
-				tasks.Add(new Range<long>{Start = start + (chunksize * (i - 1)), End = start + chunksize * i});
+				var dst = map[src];
+				var shift = dst.From - src.From;
+				outputRanges.Add(new Range(range.From + shift, range.To + shift));
 			}
-			tasks[^1] = tasks[^1] with { End = seedPair.Start + seedPair.Range - 1 };
-			var sizes = tasks.Select(x => x.End - x.Start).ToList();
-		}
-
-		tasks = tasks.Select((x, y) => x with { Index = y }).ToList();
-
-		Console.WriteLine($"{DateTime.Now:O} Beginning to process {tasks.Count} tasks.");
-
-		var threadResults = new ConcurrentBag<long>();
-
-		var sem = new Mutex();
-
-		Parallel.ForEach(tasks.AsParallel().AsOrdered(), x => {
-			sem.WaitOne();
-			Console.WriteLine($"{DateTime.Now:O} Starting thread {x.Index}");
-			sem.ReleaseMutex();
-			var threadAnswer = (long?)null;
-			var fifty = (x.End - x.Start) / 10;
-			for (var seed = x.Start; seed <= x.End; seed++)
+			else if (range.From < src.From)
 			{
-				var location = TraverseMaps(maps, seed);
-
-				if (threadAnswer == null || location < threadAnswer)
-					threadAnswer = location;
+				todo.Enqueue(new Range(range.From, src.From - 1));
+				todo.Enqueue(new Range(src.From, range.To));
 			}
-			threadResults.Add(threadAnswer!.Value);
-			sem.WaitOne();
-			Console.WriteLine($"{DateTime.Now:O} Thread {x.Index} is done.");
-			sem.ReleaseMutex();
-		});
-
-		return threadResults.Min().ToString("0");
-	}
-
-    public class Range
-    {
-        public long SourceStart { get; set; }
-        public long TargetStart { get; set; }
-        public long RangeLength { get; set; }
-
-        public long? Map(long source)
-		{
-			if (source < SourceStart || source >= SourceStart + RangeLength)
-				return null;
-
-			return source - SourceStart + TargetStart;
+			else
+			{
+				todo.Enqueue(new Range(range.From, src.To));
+				todo.Enqueue(new Range(src.To + 1, range.To));
+			}
 		}
+		return [.. outputRanges];
 	}
+
+	// see https://stackoverflow.com/a/3269471
+	bool Intersects(Range r1, Range r2) => r1.From <= r2.To && r2.From <= r1.To;
+
+	// consider each number as a range of 1 length
+	IEnumerable<Range> PartOneRanges(long[] numbers) =>
+		from n in numbers select new Range(n, n);
+
+	// chunk is a great way to iterate over the pairs of numbers
+	IEnumerable<Range> PartTwoRanges(long[] numbers) =>
+		from c in numbers.Chunk(2) select new Range(c[0], c[0] + c[1] - 1);
+
+	long[] ParseNumbers(string input) =>
+		[.. from m in Regex.Matches(input, @"\d+") select long.Parse(m.Value)];
+
+	Dictionary<Range, Range> ParseMap(string input) => (
+		from line in Regex.Split(input, @"\r?\n").Skip(1)
+		let parts = line.Split(" ").Select(long.Parse).ToArray()
+		let src = new Range(parts[1], parts[2] + parts[1] - 1)
+		let dst = new Range(parts[0], parts[2] + parts[0] - 1)
+		select new KeyValuePair<Range, Range>(src, dst)
+	).ToDictionary();
 }
+
+public record Range(long From, long To);

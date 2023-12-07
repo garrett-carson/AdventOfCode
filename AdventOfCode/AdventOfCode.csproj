@@ -34,23 +34,57 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Day\Five\Input.txt" />
-    <EmbeddedResource Include="Day\Five\Sample1.txt" />
-    <EmbeddedResource Include="Day\Five\Sample2.txt" />
-    <EmbeddedResource Include="Day\Four\Input.txt" />
-    <EmbeddedResource Include="Day\Four\Sample1.txt" />
-    <EmbeddedResource Include="Day\Four\Sample2.txt" />
-    <EmbeddedResource Include="Day\One\Input.txt" />
-    <EmbeddedResource Include="Day\One\Sample1.txt" />
-    <EmbeddedResource Include="Day\One\Sample2.txt" />
-    <EmbeddedResource Include="Day\Two\Input.param.json" />
-    <EmbeddedResource Include="Day\Two\Input.txt" />
-    <EmbeddedResource Include="Day\Two\Sample2.txt" />
-    <EmbeddedResource Include="Day\Two\Sample1.param.json" />
-    <EmbeddedResource Include="Day\Two\Sample1.txt" />
-    <EmbeddedResource Include="Day\Three\Input.txt" />
-    <EmbeddedResource Include="Day\Three\Sample2.txt" />
-    <EmbeddedResource Include="Day\Three\Sample1.txt" />
+    <Content Include="Day\Five\Input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Day\Five\Sample1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Day\Five\Sample2.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Day\Four\Input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Day\Four\Sample1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Day\Four\Sample2.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Day\One\Input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Day\One\Sample1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Day\One\Sample2.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Day\Two\Input.param.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Day\Two\Input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Day\Two\Sample2.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Day\Two\Sample1.param.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Day\Two\Sample1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Day\Three\Input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Day\Three\Sample2.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Day\Three\Sample1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

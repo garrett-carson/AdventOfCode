@@ -1,15 +1,15 @@
-﻿using AdventOfCode.Day.Three;
+﻿using AdventOfCode.Y2023.D03;
 
 namespace AdventOfCode.Tests;
 
 [TestFixture]
-public class Day3Test
+public class Day03Test
 {
-	private readonly DayBase _day;
+	private readonly Solver _day;
 
-	public Day3Test()
+	public Day03Test()
 	{
-		_day = new Day3();
+		_day = new Day03();
 	}
 
 	[Test]

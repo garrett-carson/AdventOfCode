@@ -14,75 +14,87 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Day\Five\Input.txt" />
-    <None Remove="Day\Five\Sample1.txt" />
-    <None Remove="Day\Five\Sample2.txt" />
-    <None Remove="Day\Four\Input.txt" />
-    <None Remove="Day\Four\Sample1.txt" />
-    <None Remove="Day\Four\Sample2.txt" />
-    <None Remove="Day\One\Input.txt" />
-    <None Remove="Day\One\Sample1.txt" />
-    <None Remove="Day\One\Sample2.txt" />
-    <None Remove="Day\Two\Input.param.json" />
-    <None Remove="Day\Two\Input.txt" />
-    <None Remove="Day\Two\Sample1.param.json" />
-    <None Remove="Day\Two\Sample1.txt" />
-    <None Remove="Day\Two\Sample2.txt" />
-    <None Remove="Day\Three\Input.txt" />
-    <None Remove="Day\Three\Sample1.txt" />
-    <None Remove="Day\Three\Sample2.txt" />
+    <None Remove="Y2023\D06\Input.txt" />
+    <None Remove="Y2023\D06\Sample1.txt" />
+    <None Remove="Y2023\D06\Sample2.txt" />
+    <None Remove="Y2023\D05\Input.txt" />
+    <None Remove="Y2023\D05\Sample1.txt" />
+    <None Remove="Y2023\D05\Sample2.txt" />
+    <None Remove="Y2023\D04\Input.txt" />
+    <None Remove="Y2023\D04\Sample1.txt" />
+    <None Remove="Y2023\D04\Sample2.txt" />
+    <None Remove="Y2023\D01\Input.txt" />
+    <None Remove="Y2023\D01\Sample1.txt" />
+    <None Remove="Y2023\D01\Sample2.txt" />
+    <None Remove="Y2023\D02\Input.param.json" />
+    <None Remove="Y2023\D02\Input.txt" />
+    <None Remove="Y2023\D02\Sample1.param.json" />
+    <None Remove="Y2023\D02\Sample1.txt" />
+    <None Remove="Y2023\D02\Sample2.txt" />
+    <None Remove="Y2023\D03\Input.txt" />
+    <None Remove="Y2023\D03\Sample1.txt" />
+    <None Remove="Y2023\D03\Sample2.txt" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Day\Five\Input.txt">
+    <Content Include="Y2023\D06\Input.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Day\Five\Sample1.txt">
+    <Content Include="Y2023\D06\Sample1.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Day\Five\Sample2.txt">
+    <Content Include="Y2023\D06\Sample2.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Day\Four\Input.txt">
+    <Content Include="Y2023\D05\Input.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Day\Four\Sample1.txt">
+    <Content Include="Y2023\D05\Sample1.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Day\Four\Sample2.txt">
+    <Content Include="Y2023\D05\Sample2.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Day\One\Input.txt">
+    <Content Include="Y2023\D04\Input.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Day\One\Sample1.txt">
+    <Content Include="Y2023\D04\Sample1.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Day\One\Sample2.txt">
+    <Content Include="Y2023\D04\Sample2.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Day\Two\Input.param.json">
+    <Content Include="Y2023\D01\Input.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Day\Two\Input.txt">
+    <Content Include="Y2023\D01\Sample1.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Day\Two\Sample2.txt">
+    <Content Include="Y2023\D01\Sample2.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Day\Two\Sample1.param.json">
+    <Content Include="Y2023\D02\Input.param.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Day\Two\Sample1.txt">
+    <Content Include="Y2023\D02\Input.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Day\Three\Input.txt">
+    <Content Include="Y2023\D02\Sample2.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Day\Three\Sample2.txt">
+    <Content Include="Y2023\D02\Sample1.param.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Day\Three\Sample1.txt">
+    <Content Include="Y2023\D02\Sample1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Y2023\D03\Input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Y2023\D03\Sample2.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Y2023\D03\Sample1.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

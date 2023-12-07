@@ -2,7 +2,7 @@
 
 namespace AdventOfCode;
 
-public abstract class DayBase : IDay
+public abstract class Solver : IDay
 {
 	protected static readonly Regex line = new(@"\r?\n");
 	string IDay.Q1() => Q1();
@@ -18,7 +18,7 @@ public abstract class DayBase : IDay
 		var assembly = type.Assembly;
 		var ns = type.Namespace;
 
-		return File.ReadAllText(Path.Combine("Day", ns.Split('.').Last(), filename));
+		return File.ReadAllText(Path.Combine(ns.Split('.').SkipWhile(x => x != "AdventOfCode").Skip(1).Concat(new[] { filename }).ToArray()));
 	}
 
 	public string[] GetInputLines(string? filename)

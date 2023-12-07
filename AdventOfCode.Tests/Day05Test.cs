@@ -1,15 +1,15 @@
-﻿using AdventOfCode.Day.Five;
+﻿using AdventOfCode.Y2023.D05;
 
 namespace AdventOfCode.Tests;
 
 [TestFixture]
-public class Day5Test
+public class Day05Test
 {
-	private readonly DayBase _day;
+	private readonly Solver _day;
 
-	public Day5Test()
+	public Day05Test()
 	{
-		_day = new Day5();
+		_day = new Day05();
 	}
 
 	[Test]

@@ -1,18 +1,18 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using AdventOfCode;
-using AdventOfCode.Day.Five;
-using AdventOfCode.Day.Four;
-using AdventOfCode.Day.One;
-using AdventOfCode.Day.Three;
-using AdventOfCode.Day.Two;
+using AdventOfCode.Y2023.D01;
+using AdventOfCode.Y2023.D02;
+using AdventOfCode.Y2023.D03;
+using AdventOfCode.Y2023.D04;
+using AdventOfCode.Y2023.D05;
 
 foreach (var day in new IDay[]
 {
-	new Day1(),
-	new Day2(),
-	new Day3(),
-	new Day4(),
-	new Day5(),
+	new Day01(),
+	new Day02(),
+	new Day03(),
+	new Day04(),
+	new Day05(),
 })
 {
 	Console.WriteLine(day.GetType().Name + "Q1: " + day.Q1());

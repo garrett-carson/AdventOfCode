@@ -1,18 +1,8 @@
-﻿using Microsoft.VisualBasic;
-using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-using System.Drawing;
-using System;
-using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿using AdventOfCode.Utility;
 using System.Text.RegularExpressions;
-using System.Threading;
-using System.Collections.Concurrent;
+using Range = AdventOfCode.Utility.Range;
 
 namespace AdventOfCode.Day.Five;
-
-
 
 /// <summary>
 /// --- Day 5: If You Give A Seed A Fertilizer ---
@@ -143,7 +133,7 @@ namespace AdventOfCode.Day.Five;
 /// </summary>
 public class Day5 : DayBase
 {
-    public override string Q1(string? filename = "Input.txt")
+	public override string Q1(string? filename = "Input.txt")
 	{
 		return Solve(GetInput(filename), PartOneRanges).ToString("0");
 	}
@@ -153,10 +143,10 @@ public class Day5 : DayBase
 		return Solve(GetInput(filename), PartTwoRanges).ToString("0");
 	}
 
-	long Solve(string input, Func<long[], IEnumerable<Range>> parseSeeds)
+	private long Solve(string input, Func<IEnumerable<long>, IEnumerable<Range>> parseSeeds)
 	{
 		var blocks = Regex.Split(input, @"\r?\n\r?\n");
-		var seedRanges = parseSeeds(ParseNumbers(blocks[0])).ToArray();
+		var seedRanges = parseSeeds(RegexUtility.ParseNumbers<long>(blocks[0])).ToArray();
 		var maps = blocks.Skip(1).Select(ParseMap).ToArray();
 
 		// Project each range through the series of maps, this will result some
@@ -164,7 +154,7 @@ public class Day5 : DayBase
 		return maps.Aggregate(seedRanges, Project).Select(r => r.From).Min();
 	}
 
-	Range[] Project(Range[] inputRanges, Dictionary<Range, Range> map)
+	private Range[] Project(Range[] inputRanges, Dictionary<Range, Range> map)
 	{
 		var todo = new Queue<Range>();
 		foreach (var range in inputRanges)
@@ -173,7 +163,7 @@ public class Day5 : DayBase
 		}
 
 		var outputRanges = new List<Range>();
-		while (todo.Any())
+		while (todo.Count != 0)
 		{
 			var range = todo.Dequeue();
 			// If no entry intersects our range -> just add it to the output. 
@@ -182,7 +172,7 @@ public class Day5 : DayBase
 			// the range into two halfs getting rid of the intersection. The new 
 			// pieces are added back to the queue for further processing and will be 
 			// ultimately consumed by the first two cases.
-			var src = map.Keys.FirstOrDefault(src => Intersects(src, range));
+			var src = map.Keys.FirstOrDefault(src => src.Intersects(range));
 			if (src == null)
 			{
 				outputRanges.Add(range);
@@ -207,27 +197,22 @@ public class Day5 : DayBase
 		return [.. outputRanges];
 	}
 
-	// see https://stackoverflow.com/a/3269471
-	bool Intersects(Range r1, Range r2) => r1.From <= r2.To && r2.From <= r1.To;
-
 	// consider each number as a range of 1 length
-	IEnumerable<Range> PartOneRanges(long[] numbers) =>
+	private IEnumerable<Range> PartOneRanges(IEnumerable<long> numbers) =>
 		from n in numbers select new Range(n, n);
 
 	// chunk is a great way to iterate over the pairs of numbers
-	IEnumerable<Range> PartTwoRanges(long[] numbers) =>
+	private IEnumerable<Range> PartTwoRanges(IEnumerable<long> numbers) =>
 		from c in numbers.Chunk(2) select new Range(c[0], c[0] + c[1] - 1);
 
-	long[] ParseNumbers(string input) =>
-		[.. from m in Regex.Matches(input, @"\d+") select long.Parse(m.Value)];
-
-	Dictionary<Range, Range> ParseMap(string input) => (
-		from line in Regex.Split(input, @"\r?\n").Skip(1)
+	private Dictionary<Range, Range> ParseMap(string input) => (
+		from line in RegexUtility.Line.Split(input).Skip(1)
 		let parts = line.Split(" ").Select(long.Parse).ToArray()
-		let src = new Range(parts[1], parts[2] + parts[1] - 1)
-		let dst = new Range(parts[0], parts[2] + parts[0] - 1)
+		let dstStart = parts[0]
+		let srcStart = parts[1]
+		let rangeLength = parts[2]
+		let src = new Range(srcStart, rangeLength + srcStart - 1)
+		let dst = new Range(dstStart, rangeLength + dstStart - 1)
 		select new KeyValuePair<Range, Range>(src, dst)
 	).ToDictionary();
 }
-
-public record Range(long From, long To);

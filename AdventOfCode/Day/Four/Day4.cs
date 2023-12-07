@@ -1,9 +1,4 @@
-﻿using System.Diagnostics;
-using System.Reflection.Metadata;
-using System.Reflection.PortableExecutable;
-using System.Text.RegularExpressions;
-using static System.Formats.Asn1.AsnWriter;
-using System.Threading;
+﻿using AdventOfCode.Utility;
 
 namespace AdventOfCode.Day.Four;
 
@@ -77,25 +72,16 @@ namespace AdventOfCode.Day.Four;
 /// </summary>
 public class Day4 : DayBase
 {
-	private readonly Regex _card = new(@"(?i)^Card\s+(?<CardNo>\d+):(?<Winners>(?:\s+\d+)+)\s+\|(?<Values>(?:\s+\d+)+)$");
-	private readonly Regex _space = new(@"\s+");
 	public override string Q1(string? filename = "Input.txt")
 	{
 		var lines = GetInputLines(filename);
 		var answer = 0;
 
-		var cards = lines.Select(x => _card.Match(x)).Where(x => x.Success);
-		Debug.Assert(cards.Any());
-		Debug.Assert(cards.Count() == lines.Length);
+		var cards = lines.Select(ParseCard).ToDictionary(x => x.Number);
 
-		foreach (var card in cards)
+		foreach (var (cardNo, card) in cards)
 		{
-			var cardNo = card.Groups["CardNo"].Value;
-			var winners = _space.Split(card.Groups["Winners"].Value).Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => int.Parse(x.Trim())).ToList();
-			var values = _space.Split(card.Groups["Values"].Value).Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => int.Parse(x.Trim())).ToList();
-			
-			var valuedWinners = winners.Intersect(values);
-			var points = valuedWinners.Aggregate(0, (x, y) => x == 0 ? 1 : x * 2);
+			var points = card.WinningNumbers.Aggregate(0, (x, y) => x == 0 ? 1 : x * 2);
 			answer += points;
 		}
 
@@ -107,37 +93,21 @@ public class Day4 : DayBase
 		var lines = GetInputLines(filename);
 		var answer = 0;
 
-		var cards = lines.Select(x => _card.Match(x)).Where(x => x.Success);
-		Debug.Assert(cards.Any());
-		Debug.Assert(cards.Count() == lines.Length);
-
-		var winningNumbers = new Dictionary<int, List<int>>();
-
-		foreach (var card in cards)
-		{
-			var cardNo = int.Parse(card.Groups["CardNo"].Value);
-			var winners = _space.Split(card.Groups["Winners"].Value).Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => int.Parse(x.Trim())).ToList();
-			var values = _space.Split(card.Groups["Values"].Value).Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => int.Parse(x.Trim())).ToList();
-
-			var valuedWinners = winners.Intersect(values).ToList();
-
-			winningNumbers.Add(cardNo, valuedWinners);
-		}
+		var cards = lines.Select(ParseCard).ToDictionary(x => x.Number);
 
 		var cardsToCheck = new Queue<int>();
-		foreach (var card in winningNumbers)
+		foreach (var card in cards)
 		{
 			cardsToCheck.Enqueue(card.Key);
 		}
-		var scratchersWithDuplicates = new List<int>();
-		var max = winningNumbers.Keys.Max();
+		var max = cards.Keys.Max();
 
-		while (cardsToCheck.Any())
+		while (cardsToCheck.Count != 0)
 		{
 			answer++;
 			var toCheck = cardsToCheck.Dequeue();
-			var linkedWinners = winningNumbers[toCheck];
-			for (int i = 1; i <= linkedWinners.Count; i++)
+			var linkedWinners = cards[toCheck];
+			for (int i = 1; i <= linkedWinners.WinningNumbers.Count(); i++)
 			{
 				if(toCheck + i <= max)
 					cardsToCheck.Enqueue(toCheck + i);
@@ -146,4 +116,18 @@ public class Day4 : DayBase
 
 		return answer.ToString("0");
 	}
+
+	private Card ParseCard(string line)
+	{
+		var split = line.Split(':', '|');
+		var cardNo = RegexUtility.ParseNumbers(split[0]).First();
+		var winners = RegexUtility.ParseNumbers(split[1]);
+		var values = RegexUtility.ParseNumbers(split[2]);
+
+		var valuedWinners = winners.Intersect(values);
+
+		return new Card(cardNo, valuedWinners.ToList());
+	}
+
+	private record Card(int Number, IEnumerable<int> WinningNumbers);
 }

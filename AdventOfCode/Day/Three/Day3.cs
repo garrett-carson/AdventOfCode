@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using AdventOfCode.Utility;
+using System.Text.RegularExpressions;
 
 namespace AdventOfCode.Day.Three;
 
@@ -66,7 +67,6 @@ namespace AdventOfCode.Day.Three;
 /// </summary>
 public class Day3 : DayBase
 {
-    private static readonly Regex _digits = new(@"\d+");
     private static readonly Regex _symbol = new(@"[^\d.]");
     private static readonly Regex _gear = new(@"\*");
     public override string Q1(string? filename = "Input.txt")
@@ -77,7 +77,7 @@ public class Day3 : DayBase
         for (int i = 0; i < lines.Length; i++)
         {
             var line = lines[i];
-            var numbers = _digits.Matches(line);
+            var numbers = RegexUtility.Digits.Matches(line);
             foreach (var match in numbers.Cast<Match>())
             {
                 var matchIndex = match.Index;
@@ -136,12 +136,12 @@ public class Day3 : DayBase
             var numbersToCheck = new List<Match>();
             if (lineIndex > 0)
             {
-                numbersToCheck.AddRange(_digits.Matches(lines[lineIndex - 1]).Cast<Match>());
+                numbersToCheck.AddRange(RegexUtility.Digits.Matches(lines[lineIndex - 1]).Cast<Match>());
             }
-            numbersToCheck.AddRange(_digits.Matches(lines[lineIndex]).Cast<Match>());
+            numbersToCheck.AddRange(RegexUtility.Digits.Matches(lines[lineIndex]).Cast<Match>());
             if (lineIndex < lines.Length - 1)
             {
-                numbersToCheck.AddRange(_digits.Matches(lines[lineIndex + 1]).Cast<Match>());
+                numbersToCheck.AddRange(RegexUtility.Digits.Matches(lines[lineIndex + 1]).Cast<Match>());
             }
 
             var numbersToMult = new List<int>();

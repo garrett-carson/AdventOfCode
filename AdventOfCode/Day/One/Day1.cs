@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using AdventOfCode.Utility;
+using System.Text.RegularExpressions;
 
 namespace AdventOfCode.Day.One;
 /// <summary>
@@ -49,7 +50,6 @@ public class Day1 : DayBase
 {
 	private static readonly Regex _enhancedFirstDigit;
 	private static readonly Regex _enhancedLastDigit;
-	private static readonly Regex _digit = new(@"\d");
 	private static readonly IDictionary<string, int> wordsToNumbers = new Dictionary<string, int>(StringComparer.CurrentCultureIgnoreCase)
 	{
 		{"zero", 0},
@@ -77,7 +77,7 @@ public class Day1 : DayBase
 		int total = 0;
 		foreach (var line in input)
 		{
-			var numbers = _digit.Matches(line);
+			var numbers = RegexUtility.Digit.Matches(line);
 			var first = numbers.First();
 			var last = numbers.Last();
 			var value = Convert.ToInt32(string.Concat(first, last));

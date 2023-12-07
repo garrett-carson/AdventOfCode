@@ -5,6 +5,8 @@ using AdventOfCode.Y2023.D02;
 using AdventOfCode.Y2023.D03;
 using AdventOfCode.Y2023.D04;
 using AdventOfCode.Y2023.D05;
+using AdventOfCode.Y2023.D06;
+using AdventOfCode.Y2023.D07;
 
 foreach (var day in new IDay[]
 {
@@ -13,6 +15,8 @@ foreach (var day in new IDay[]
 	new Day03(),
 	new Day04(),
 	new Day05(),
+	new Day06(),
+	new Day07(),
 })
 {
 	Console.WriteLine(day.GetType().Name + "Q1: " + day.Q1());

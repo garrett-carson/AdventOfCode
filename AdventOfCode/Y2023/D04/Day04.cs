@@ -1,6 +1,4 @@
-﻿using AdventOfCode.Utility;
-
-namespace AdventOfCode.Y2023.D04;
+﻿namespace AdventOfCode.Y2023.D04;
 
 public class Day04 : Solver
 {

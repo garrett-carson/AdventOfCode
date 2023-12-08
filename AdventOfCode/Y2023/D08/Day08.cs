@@ -7,19 +7,18 @@ namespace AdventOfCode.Y2023.D08;
 public partial class Day08 : Solver
 {
 	public override string Q1(string? filename = "Input.txt") =>
-		Solve(filename!, "^AAA$", "^ZZZ$");
+		Solve(filename!, Aaa(), Zzz());
 
 	public override string Q2(string? filename = "Input.txt") =>
-		Solve(filename!, "A$", "Z$");
+		Solve(filename!, EndsWithA(), EndsWithZ());
 
-	private string Solve(string filename, string startPattern, string endPattern)
+	private string Solve(string filename, Regex startRegex, Regex endRegex)
 	{
 		var blocks = RegexUtility.Block.Split(GetInput(filename));
 
 		var nodes = RegexUtility.Line.Split(blocks[1].TrimEnd()).Select(ParseNode).ToDictionary();
 
-		var starts = nodes.Keys.Where(x => Regex.IsMatch(x, startPattern)).ToArray();
-		var endRegex = new Regex(endPattern, RegexOptions.Compiled);
+		var starts = nodes.Keys.Where(x => startRegex.IsMatch(x)).ToArray();
 
 		var steps = ParseSteps(blocks[0]);
 
@@ -61,5 +60,14 @@ public partial class Day08 : Solver
 				yield return character;
 		}
 	}
+
+	[GeneratedRegex("A$")]
+	private static partial Regex EndsWithA();
+	[GeneratedRegex("Z$")]
+	private static partial Regex EndsWithZ();
+	[GeneratedRegex(@"^AAA$")]
+	private static partial Regex Aaa();
+	[GeneratedRegex("^ZZZ$")]
+	private static partial Regex Zzz();
 }
 

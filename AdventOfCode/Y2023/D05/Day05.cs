@@ -78,7 +78,7 @@ public class Day05 : Solver
 		from c in numbers.Chunk(2) select new Range(c[0], c[0] + c[1] - 1);
 
 	private Dictionary<Range, Range> ParseMap(string input) => (
-		from line in RegexUtility.Line.Split(input).Skip(1)
+		from line in RegexUtility.Line.Split(input.TrimEnd()).Skip(1)
 		let parts = line.Split(" ").Select(long.Parse).ToArray()
 		let dstStart = parts[0]
 		let srcStart = parts[1]

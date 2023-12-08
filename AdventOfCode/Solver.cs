@@ -14,11 +14,25 @@ public abstract class Solver : IDay
 	{
 		filename ??= "Input.txt";
 
+		if (filename.Equals("Input.txt", StringComparison.CurrentCultureIgnoreCase))
+			return DownloadInput(filename);
+
 		var type = GetType();
 		var assembly = type.Assembly;
 		var ns = type.Namespace;
 
 		return File.ReadAllText(Path.Combine(ns.Split('.').SkipWhile(x => x != "AdventOfCode").Skip(1).Concat(new[] { filename }).ToArray()));
+	}
+
+	private string DownloadInput(string filename)
+	{
+		//TODO: Download input. For now, just save it manually
+
+		var type = GetType();
+		var assembly = type.Assembly;
+		var ns = type.Namespace;
+
+		return File.ReadAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads", type.Name + ".txt"));
 	}
 
 	public string[] GetInputLines(string? filename)

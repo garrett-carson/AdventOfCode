@@ -14,42 +14,29 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Y2023\D07\Input.txt" />
     <None Remove="Y2023\D07\Sample1.txt" />
     <None Remove="Y2023\D07\Sample2.txt" />
-    <None Remove="Y2023\D06\Input.txt" />
     <None Remove="Y2023\D06\Sample1.txt" />
     <None Remove="Y2023\D06\Sample2.txt" />
-    <None Remove="Y2023\D05\Input.txt" />
     <None Remove="Y2023\D05\Sample1.txt" />
     <None Remove="Y2023\D05\Sample2.txt" />
-    <None Remove="Y2023\D04\Input.txt" />
     <None Remove="Y2023\D04\Sample1.txt" />
     <None Remove="Y2023\D04\Sample2.txt" />
-    <None Remove="Y2023\D01\Input.txt" />
     <None Remove="Y2023\D01\Sample1.txt" />
     <None Remove="Y2023\D01\Sample2.txt" />
     <None Remove="Y2023\D02\Input.param.json" />
-    <None Remove="Y2023\D02\Input.txt" />
     <None Remove="Y2023\D02\Sample1.param.json" />
     <None Remove="Y2023\D02\Sample1.txt" />
     <None Remove="Y2023\D02\Sample2.txt" />
-    <None Remove="Y2023\D03\Input.txt" />
     <None Remove="Y2023\D03\Sample1.txt" />
     <None Remove="Y2023\D03\Sample2.txt" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Y2023\D07\Input.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Y2023\D07\Sample1.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Y2023\D07\Sample2.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Y2023\D06\Input.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Y2023\D06\Sample1.txt">
@@ -58,25 +45,16 @@
     <Content Include="Y2023\D06\Sample2.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Y2023\D05\Input.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Y2023\D05\Sample1.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Y2023\D05\Sample2.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Y2023\D04\Input.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Y2023\D04\Sample1.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Y2023\D04\Sample2.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Y2023\D01\Input.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Y2023\D01\Sample1.txt">
@@ -88,9 +66,6 @@
     <Content Include="Y2023\D02\Input.param.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Y2023\D02\Input.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Y2023\D02\Sample2.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -98,9 +73,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Y2023\D02\Sample1.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Y2023\D03\Input.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Y2023\D03\Sample2.txt">

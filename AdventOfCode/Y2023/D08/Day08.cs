@@ -6,40 +6,20 @@ namespace AdventOfCode.Y2023.D08;
 
 public partial class Day08 : Solver
 {
-	public override string Q1(string? filename = "Input.txt")
+	public override string Q1(string? filename = "Input.txt") =>
+		Solve(filename!, "^AAA$", "^ZZZ$");
+
+	public override string Q2(string? filename = "Input.txt") =>
+		Solve(filename!, "A$", "Z$");
+
+	private string Solve(string filename, string startPattern, string endPattern)
 	{
 		var blocks = RegexUtility.Block.Split(GetInput(filename));
 
-		var tree = RegexUtility.Line.Split(blocks[1].TrimEnd()).Select(ParseNode).ToDictionary();
-		var current = "AAA";
+		var nodes = RegexUtility.Line.Split(blocks[1].TrimEnd()).Select(ParseNode).ToDictionary();
 
-		var steps = ParseSteps(blocks[0]);
-
-		var count = 0;
-		foreach (var step in steps)
-		{
-			count++;
-
-			current = step switch
-			{
-				'L' => tree[current].Left,
-				'R' => tree[current].Right,
-				_ => throw new NotImplementedException(),
-			};
-
-			if(current.Equals("ZZZ", StringComparison.CurrentCultureIgnoreCase))
-				return count.ToString("0");
-		}
-		throw new NotImplementedException("Steps is assumed to be infinite");
-	}
-
-	public override string Q2(string? filename = "Input.txt")
-	{
-		var blocks = RegexUtility.Block.Split(GetInput(filename));
-
-		var tree = RegexUtility.Line.Split(blocks[1].TrimEnd()).Select(ParseNode).ToDictionary();
-
-		var starts = tree.Keys.Where(x => x[2] == 'A').ToArray();
+		var starts = nodes.Keys.Where(x => Regex.IsMatch(x, startPattern)).ToArray();
+		var endRegex = new Regex(endPattern, RegexOptions.Compiled);
 
 		var steps = ParseSteps(blocks[0]);
 
@@ -54,11 +34,11 @@ public partial class Day08 : Solver
 
 				current = step switch
 				{
-					'L' => tree[current].Left,
-					'R' => tree[current].Right,
+					'L' => nodes[current].Left,
+					'R' => nodes[current].Right,
 				};
 
-				if (current[2] == 'Z')
+				if (endRegex.IsMatch(current))
 					break;
 			}
 			results.Add(count);

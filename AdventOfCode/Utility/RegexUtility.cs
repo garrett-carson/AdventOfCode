@@ -12,8 +12,8 @@ public static class RegexUtility
 	public static readonly Regex Whitespace = new(@"(?s)\s+", RegexOptions.Compiled);
 	public static readonly Regex Words = new(@"[a-zA-Z0-9]+", RegexOptions.Compiled);
 
-	public static IEnumerable<int> ParseNumbers(string input) => ParseNumbers<int>(input);
+	public static int[] ParseNumbers(string input) => ParseNumbers<int>(input);
 
-	public static IEnumerable<T> ParseNumbers<T>(string input) where T : IParsable<T> =>
-		Digits.Matches(input).Select(x => x.Value).Select(x => T.Parse(x, null)).ToList();
+	public static T[] ParseNumbers<T>(string input) where T : IParsable<T> =>
+		Digits.Matches(input).Select(x => x.Value).Select(x => T.Parse(x, null)).ToArray();
 }

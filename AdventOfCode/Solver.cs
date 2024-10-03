@@ -5,8 +5,6 @@ namespace AdventOfCode;
 public abstract class Solver : IDay
 {
 	protected static readonly Regex line = new(@"\r?\n");
-	string IDay.Q1() => Q1();
-	string IDay.Q2() => Q2();
 	public abstract string Q1(string? filename = "Input.txt");
 	public abstract string Q2(string? filename = "Input.txt");
 

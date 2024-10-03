@@ -30,17 +30,15 @@ public class Day04 : Solver
 		{
 			cardsToCheck.Enqueue(card.Key);
 		}
-		var max = cards.Keys.Max();
 
 		while (cardsToCheck.Count != 0)
 		{
 			answer++;
 			var toCheck = cardsToCheck.Dequeue();
 			var linkedWinners = cards[toCheck];
-			for (int i = 1; i <= linkedWinners.WinningNumbers.Count(); i++)
+			for (int i = 1; i <= linkedWinners.WinningNumbers.Count; i++)
 			{
-				if (toCheck + i <= max)
-					cardsToCheck.Enqueue(toCheck + i);
+				cardsToCheck.Enqueue(toCheck + i);
 			}
 		}
 
@@ -50,7 +48,7 @@ public class Day04 : Solver
 	private Card ParseCard(string line)
 	{
 		var split = line.Split(':', '|');
-		var cardNo = RegexUtility.ParseNumbers(split[0]).First();
+		var cardNo = RegexUtility.ParseNumbers(split[0])[0];
 		var winners = RegexUtility.ParseNumbers(split[1]);
 		var values = RegexUtility.ParseNumbers(split[2]);
 
@@ -59,5 +57,5 @@ public class Day04 : Solver
 		return new Card(cardNo, valuedWinners.ToList());
 	}
 
-	private record Card(int Number, IEnumerable<int> WinningNumbers);
+	private record Card(int Number, IList<int> WinningNumbers);
 }

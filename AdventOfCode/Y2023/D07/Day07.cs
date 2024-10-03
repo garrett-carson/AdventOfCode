@@ -42,7 +42,7 @@ public class Day07 : Solver
 		return cards.Select(x => priorityList.IndexOf(x)).ToArray();
 	}
 
-	private HandType GetHandType(string hand)
+	private static HandType GetHandType(string hand)
 	{
 		var occurence = hand.GroupBy(x => x).ToDictionary(x => x.Key, x => x.Count());
 		if (occurence.Any(x => x.Value == 5))

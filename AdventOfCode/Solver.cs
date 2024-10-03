@@ -4,7 +4,7 @@ namespace AdventOfCode;
 
 public abstract class Solver : IDay
 {
-	protected static readonly Regex line = new(@"\r?\n");
+	protected static readonly Regex x = new(@"\r?\n");
 	public abstract string Q1(string? filename = "Input.txt");
 	public abstract string Q2(string? filename = "Input.txt");
 
@@ -36,7 +36,7 @@ public abstract class Solver : IDay
 	public string[] GetInputLines(string? filename)
 	{
 		var input = GetInput(filename);
-		return line.Split(input.Trim());
+		return x.Split(input.Trim());
 	}
 
 	public class Old

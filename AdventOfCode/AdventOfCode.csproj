@@ -33,6 +33,8 @@
     <None Remove="Y2023\D03\Sample1.txt" />
     <None Remove="Y2023\D03\Sample2.txt" />
     <None Remove="Y2023\D08\Sample3.txt" />
+    <None Remove="Y2023\D09\Sample1.txt" />
+    <None Remove="Y2023\D09\Sample2.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -93,14 +95,16 @@
     <Content Include="Y2023\D03\Sample1.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Y2023\D09\Sample1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Y2023\D09\Sample2.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Y2023\D09\" />
   </ItemGroup>
 
 </Project>

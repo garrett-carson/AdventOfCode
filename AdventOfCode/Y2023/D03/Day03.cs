@@ -4,7 +4,7 @@ namespace AdventOfCode.Y2023.D03;
 
 public class Day03 : Solver
 {
-	private static readonly Regex _symbol = new(@"[^\d.]");
+	private static readonly Regex _symbol = new(@"[^\d\n.]");
 	private static readonly Regex _gear = new(@"\*");
 	public override string Q1(string? filename = "Input.txt")
 	{
@@ -14,42 +14,51 @@ public class Day03 : Solver
 		for (int i = 0; i < lines.Length; i++)
 		{
 			var line = lines[i];
-			var numbers = RegexUtility.Digits.Matches(line);
-			foreach (var match in numbers.Cast<Match>())
+			var numbers = RegexUtility.UnsignedDigits.Matches(line).Cast<Match>();
+			foreach (var match in numbers)
 			{
 				var matchIndex = match.Index;
 				var matchLength = match.Length;
 				var matchValue = int.Parse(match.Value);
-				if (matchIndex > 0 && _symbol.IsMatch(line[matchIndex - 1].ToString()))
+				var surround = GetSurrounding(lines, i, matchIndex, matchLength);
+
+				if (_symbol.IsMatch(surround))
 				{
 					answer += matchValue;
 					continue;
-				}
-				if (match.Length + matchIndex < line.Length && _symbol.IsMatch(line[matchIndex + matchLength].ToString()))
-				{
-					answer += matchValue;
-					continue;
-				}
-				if (i > 0)
-				{
-					if (lines[i - 1].Skip(matchIndex > 0 ? matchIndex - 1 : 0).Take(matchLength + 2).Any(x => _symbol.IsMatch(x.ToString())))
-					{
-						answer += matchValue;
-						continue;
-					}
-				}
-				if (i < lines.Length - 1)
-				{
-					if (lines[i + 1].Skip(matchIndex > 0 ? matchIndex - 1 : 0).Take(matchLength + 2).Any(x => _symbol.IsMatch(x.ToString())))
-					{
-						answer += matchValue;
-						continue;
-					}
 				}
 			}
 		}
 
 		return answer.ToString("0");
+	}
+
+	public static string GetSurrounding(string[] lines, int lineNo, int charNo, int length)
+	{
+		string? prevLine = null;
+		string? currLine = null;
+		string? nextLine = null;
+
+		var maxX = lines[lineNo].Length - 1;
+
+		var startx = charNo - 1;
+		startx = startx < 0 ? 0 : startx;
+		var endx = charNo + length + 1;
+		endx = endx > maxX ? maxX : endx;
+
+        if (lineNo > 0)
+        {
+			prevLine = lines[lineNo - 1].Substring(startx, endx - startx);
+        }
+
+		currLine = lines[lineNo].Substring(startx, endx - startx);
+
+		if (lineNo + 1 < lines.Length)
+		{
+			nextLine = lines[lineNo+1].Substring(startx, endx - startx);
+		}
+
+        return $"{prevLine}\n{currLine}\n{nextLine}";
 	}
 
 	public override string Q2(string? filename = "Input.txt")
@@ -73,12 +82,12 @@ public class Day03 : Solver
 			var numbersToCheck = new List<Match>();
 			if (lineIndex > 0)
 			{
-				numbersToCheck.AddRange(RegexUtility.Digits.Matches(lines[lineIndex - 1]).Cast<Match>());
+				numbersToCheck.AddRange(RegexUtility.UnsignedDigits.Matches(lines[lineIndex - 1]).Cast<Match>());
 			}
-			numbersToCheck.AddRange(RegexUtility.Digits.Matches(lines[lineIndex]).Cast<Match>());
+			numbersToCheck.AddRange(RegexUtility.UnsignedDigits.Matches(lines[lineIndex]).Cast<Match>());
 			if (lineIndex < lines.Length - 1)
 			{
-				numbersToCheck.AddRange(RegexUtility.Digits.Matches(lines[lineIndex + 1]).Cast<Match>());
+				numbersToCheck.AddRange(RegexUtility.UnsignedDigits.Matches(lines[lineIndex + 1]).Cast<Match>());
 			}
 
 			var numbersToMult = new List<int>();

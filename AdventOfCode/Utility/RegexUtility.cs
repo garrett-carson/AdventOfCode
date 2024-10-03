@@ -6,7 +6,8 @@ public static class RegexUtility
 {
 
 	public static readonly Regex Digit = new(@"\d", RegexOptions.Compiled);
-	public static readonly Regex Digits = new(@"\d+", RegexOptions.Compiled);
+	public static readonly Regex Digits = new(@"-?\d+", RegexOptions.Compiled);
+	public static readonly Regex UnsignedDigits = new(@"\d+", RegexOptions.Compiled);
 	public static readonly Regex Line = new(@"\r?\n", RegexOptions.Compiled);
 	public static readonly Regex Block = new(@"\r?\n\r?\n", RegexOptions.Compiled);
 	public static readonly Regex Whitespace = new(@"(?s)\s+", RegexOptions.Compiled);

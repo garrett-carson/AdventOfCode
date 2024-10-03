@@ -1,6 +1,4 @@
-﻿
-using System.Diagnostics;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace AdventOfCode.Y2023.D08;
 

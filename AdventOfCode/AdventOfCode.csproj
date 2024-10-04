@@ -35,6 +35,9 @@
     <None Remove="Y2023\D08\Sample3.txt" />
     <None Remove="Y2023\D09\Sample1.txt" />
     <None Remove="Y2023\D09\Sample2.txt" />
+    <None Remove="Y2023\D10\Sample1.txt" />
+    <None Remove="Y2023\D10\Sample2.txt" />
+    <None Remove="Y2023\D10\Sample3.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -99,6 +102,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Y2023\D09\Sample2.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Y2023\D10\Sample1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Y2023\D10\Sample3.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Y2023\D10\Sample2.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

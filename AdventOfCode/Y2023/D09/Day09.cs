@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-
-namespace AdventOfCode.Y2023.D09;
+﻿namespace AdventOfCode.Y2023.D09;
 
 public partial class Day09 : Solver
 {

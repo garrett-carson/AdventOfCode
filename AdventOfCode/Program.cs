@@ -8,6 +8,7 @@ using AdventOfCode.Y2023.D06;
 using AdventOfCode.Y2023.D07;
 using AdventOfCode.Y2023.D08;
 using AdventOfCode.Y2023.D09;
+using AdventOfCode.Y2023.D10;
 
 namespace AdventOfCode
 {
@@ -24,14 +25,15 @@ namespace AdventOfCode
 			new Day07(),
 			new Day08(),
 			new Day09(),
+			new Day10(),
 		];
 
 		public static void Main(string[] args)
 		{
 			foreach (var day in Days)
 			{
-				Console.WriteLine(day.GetType().Name + "Q1: " + day.Q1());
-				Console.WriteLine(day.GetType().Name + "Q2: " + day.Q2());
+				Console.WriteLine(day.GetType().Name + "Q1: " + day.Q1("Input.txt"));
+				Console.WriteLine(day.GetType().Name + "Q2: " + day.Q2("Input.txt"));
 			}
 		}
 	}

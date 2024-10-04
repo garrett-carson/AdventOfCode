@@ -50,6 +50,12 @@ public class MegaTest
 	[InlineData(9, 2, "Sample2.txt", "5")]
 	[InlineData(9, 1, "Input.txt", "1842168671")]
 	[InlineData(9, 2, "Input.txt", "903")]
+
+	[InlineData(10, 1, "Sample1.txt", "4")]
+	[InlineData(10, 1, "Sample2.txt", "8")]
+	[InlineData(10, 2, "Sample3.txt", "4")]
+	[InlineData(10, 1, "Input.txt", "7086")]
+	[InlineData(10, 2, "Input.txt", "317")]
 	public async Task Test(int day, int question, string fileName, string expected)
 	{
 		var solver = Program.Days.Single(x => x.GetType().Name == $"Day{day:00}");
